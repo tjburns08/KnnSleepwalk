@@ -1,6 +1,6 @@
-# Code: a helper function for sleepwalk for KNN visualization
+# Code: KNN sleepwalk functions
 # Author: Tyler J Burns
-# Date: November 16, 2022
+# Date: May 7, 2024
 
 #' @title K-nearest neighbors Sleepwalk Direct
 #' @description Takes a data matrix and a 2-D embedding as input. It produces
