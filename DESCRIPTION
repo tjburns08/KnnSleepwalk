@@ -1,6 +1,6 @@
 Package: KnnSleepwalk
 Type: Package
-Title: Compare K-nearest neighbors of one biaxial plot to another.
+Title: Compare K-nearest neighbors of one biaxial plot to another
 Version: 0.1.0
 Author: Who wrote it
 Maintainer: Tyler Burns <info@burnslsc.com>
@@ -11,6 +11,7 @@ Description: Built off of the sleepwalk package for single-cell data,
   of the original high-dimensional space on the other.
 License: GPL (>= 3)
 Imports:
+    magrittr,
     sleepwalk
 Encoding: UTF-8
 LazyData: true

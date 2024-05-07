@@ -11,7 +11,7 @@ KfnSleepwalk(
   k = 100,
   output_file = NULL,
   point_size = 1.5,
-  dimr_names = c("KFN UMAP space", "KFN high-dim space")
+  plot_names = c("KFN embedding space", "KFN high-dim space")
 )
 }
 \arguments{
@@ -24,6 +24,12 @@ the matrix must already be filtered by the markers you care about.}
 data points as rows and two columns.}
 
 \item{k}{The number of nearest neighbors to be visualized}
+
+\item{output_file}{The file to save your sleepwalk html page to}
+
+\item{point_size}{How big you want the point on the plots to be}
+
+\item{plot_names}{What you want the comparison plots to be named}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces

@@ -2,6 +2,11 @@
 # Author: Tyler J Burns
 # Date: May 7, 2024
 
+#' @importFrom magrittr %>%
+#' @importFrom stats dist
+#' @import sleepwalk
+NULL
+
 #' @title K-nearest neighbors Sleepwalk Direct
 #' @description Takes a data matrix and a 2-D embedding as input. It produces
 #' a 'KNN matrix' and places that along with the aforementioned inputs into the
@@ -14,7 +19,11 @@
 #' @param embedding The 2-D embedding of the data matrix, in matrix format with
 #' data points as rows and two columns.
 #' @param k The number of nearest neighbors to be visualized
-KnnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, point_size = 1.5, dimr_names = c("KNN UMAP space", "KNN high-dim space")) {
+#' @param output_file The file to save your sleepwalk html page to
+#' @param point_size How big you want the point on the plots to be
+#' @param plot_names What you want the comparison plots to be named
+#' @export
+KnnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, point_size = 1.5, plot_names = c("KNN embedding space", "KNN high-dim space")) {
   message('Building distance matrix')
 
   # First distance matrix
@@ -39,7 +48,12 @@ KnnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, poi
     return(curr)
   }) %>% do.call(rbind, .)
 
-  sleepwalk::sleepwalk(embeddings = embedding, compare = "distances", distances = list(nn_mat1, nn_mat2), saveToFile = output_file, pointSize = point_size, titles = dimr_names)
+  sleepwalk::sleepwalk(embeddings = embedding,
+                       compare = "distances",
+                       distances = list(nn_mat1, nn_mat2),
+                       saveToFile = output_file,
+                       pointSize = point_size,
+                       titles = plot_names)
 }
 
 #' @title K-farthest neighbors Sleepwalk Direct
@@ -54,7 +68,11 @@ KnnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, poi
 #' @param embedding The 2-D embedding of the data matrix, in matrix format with
 #' data points as rows and two columns.
 #' @param k The number of nearest neighbors to be visualized
-KfnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, point_size = 1.5, dimr_names = c("KFN UMAP space", "KFN high-dim space")) {
+#' @param output_file The file to save your sleepwalk html page to
+#' @param point_size How big you want the point on the plots to be
+#' @param plot_names What you want the comparison plots to be named
+#' @export
+KfnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, point_size = 1.5, plot_names = c("KFN embedding space", "KFN high-dim space")) {
   message('Building distance matrix')
 
   # First distance matrix
@@ -64,7 +82,7 @@ KfnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, poi
   message("Finding k-nearest neighbors for mat1")
   nn_mat1 <- lapply(seq(nrow(dist_mat1)), function(i) {
     curr <- dist_mat1[i,]
-    min_dist <- sort(curr, decreasing = TRUE)[k] # This is the K, decreasing set to false
+    min_dist <- sort(curr, decreasing = TRUE)[k] # This is the K, decreasing set to true
     curr <- ifelse(curr >= min_dist, curr, 1000) # A large number
     return(curr)
   }) %>% do.call(rbind, .)
@@ -79,6 +97,11 @@ KfnSleepwalk <- function(mat1, mat2, embedding, k = 100, output_file = NULL, poi
     return(curr)
   }) %>% do.call(rbind, .)
 
-  sleepwalk::sleepwalk(embeddings = embedding, compare = "distances", distances = list(nn_mat1, nn_mat2), saveToFile = output_file, pointSize = point_size, titles = dimr_names)
+  sleepwalk::sleepwalk(embeddings = embedding,
+                       compare = "distances",
+                       distances = list(nn_mat1, nn_mat2),
+                       saveToFile = output_file,
+                       pointSize = point_size,
+                       titles = plot_names)
 }
 
