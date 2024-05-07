@@ -2,27 +2,33 @@
 % Please edit documentation in R/knn_sleepwalk_functions.R
 \name{KfnSleepwalk}
 \alias{KfnSleepwalk}
-\title{K-farthest neighbors Sleepwalk}
+\title{K-farthest neighbors Sleepwalk Direct}
 \usage{
 KfnSleepwalk(
-  mat,
+  mat1,
+  mat2,
   embedding,
   k = 100,
   output_file = NULL,
-  dimr_names = c("t-SNE", "UMAP")
+  point_size = 1.5,
+  dimr_names = c("KFN UMAP space", "KFN high-dim space")
 )
 }
 \arguments{
-\item{mat}{A data matrix with data points as rows and features as columns.
+\item{mat1}{A data matrix with data points as rows and features as columns.
 the matrix must already be filtered by the markers you care about.}
+
+\item{mat2}{A second data matrix in the format as above}
 
 \item{embedding}{The 2-D embedding of the data matrix, in matrix format with
 data points as rows and two columns.}
 
-\item{k}{The number of farthest neighbors to be visualized}
+\item{k}{The number of nearest neighbors to be visualized}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces
 a 'KFN matrix' and places that along with the aforementioned inputs into the
-sleepwalk function.
+sleepwalk function. Unlike the default KFN sleepwalk function, this one makes
+two KFN matrices, like UMAP space vs high-D space for comparisons across the
+same embedding.
 }

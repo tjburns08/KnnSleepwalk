@@ -2,20 +2,23 @@
 % Please edit documentation in R/knn_sleepwalk_functions.R
 \name{KnnSleepwalk}
 \alias{KnnSleepwalk}
-\title{K-nearest neighbors Sleepwalk}
+\title{K-nearest neighbors Sleepwalk Direct}
 \usage{
 KnnSleepwalk(
-  mat,
+  mat1,
+  mat2,
   embedding,
   k = 100,
   output_file = NULL,
   point_size = 1.5,
-  dimr_names = c("t-SNE", "UMAP")
+  dimr_names = c("KNN UMAP space", "KNN high-dim space")
 )
 }
 \arguments{
-\item{mat}{A data matrix with data points as rows and features as columns.
+\item{mat1}{A data matrix with data points as rows and features as columns.
 the matrix must already be filtered by the markers you care about.}
+
+\item{mat2}{A second data matrix in the format as above}
 
 \item{embedding}{The 2-D embedding of the data matrix, in matrix format with
 data points as rows and two columns.}
@@ -25,5 +28,7 @@ data points as rows and two columns.}
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces
 a 'KNN matrix' and places that along with the aforementioned inputs into the
-sleepwalk function.
+sleepwalk function. Unlike the default KNN sleepwalk function, this one makes
+two KNN matrices, like UMAP space vs high-D space for comparisons across the
+same embedding.
 }
