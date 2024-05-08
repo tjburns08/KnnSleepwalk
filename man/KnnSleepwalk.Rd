@@ -10,7 +10,8 @@ KnnSleepwalk(
   k = 100,
   output_file = NULL,
   point_size = 1.5,
-  plot_names = c("KNN embedding space", "KNN high-dim space")
+  plot_names = c("KNN embedding space", "KNN high-dim space"),
+  kfn = FALSE
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ the matrix must already be filtered by the markers you care about.}
 \item{point_size}{How big you want the point on the plots to be}
 
 \item{plot_names}{What you want the comparison plots to be named}
+
+\item{kfn}{Whether you want to look at the k-farthest neighbors. If false (default) then you look at the K-nearest nighbors.}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces

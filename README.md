@@ -1,7 +1,7 @@
 # KNN Sleepwalk
 
 ## Introduction, the problem
-This package builds off of the sleepwalk R package, which you can find here.  [here](https://anders-biostat.github.io/sleepwalk/). In short, rather than "walking" through your embedding to visualize distances between cells, you are visualizing the literal K-nearest neighbors of a given cell that the cursor is on, either from the emebdding space, or from the original high dimensional data.
+This package builds off of the sleepwalk R package, which you can find  [here](https://anders-biostat.github.io/sleepwalk/). In short, rather than "walking" through your embedding to visualize distances between cells, you are visualizing the literal K-nearest neighbors of a given cell that the cursor is on, either from the emebdding space, or from the original high dimensional data.
 
 The motivation for this wrapper comes from previous work I've done on the quality of dimension reduction embeddings for cytometry data, which you can view [here](https://tjburns08.github.io/tjb_dimr_talk.pdf). Simply put, some users in the cytometry field like to gate or cluster directly on the embeddings. This re-working of sleepwalk allows these users to gain additional intuition around whether this is a good idea for the data in question and/or a particular cell subset.  
 
@@ -32,15 +32,9 @@ Now we run KNN sleepwalk:
 KnnSleepwalk(embedding = umap, orig_data = surface, k = 20)
 ```
 
-If you get that working, try running KFN sleepwalk, which will give you the k-farthest neighbors. The purpose of this is to gain some intuition around how well a given embedding preserves the global environment, by means of looking at the cells farthest away from a given cell. You'll note that these differ quite a bit between embedding space and original marker space:
-
-```r
-KfnSleepwalk(embedding = umap, orig_data = surface, k = 20)
-```
-
 When you run sleepwalk, a browser window will open up with the interactive embedding. The more cells you have, the longer it will take for the map to show up in the browser window. There will be a lag time where the browser window is blank. When you test this tool for the first time, run it with a subsample of 1000 cells. In my experience, 10000 cells with a k of 100 gives you the intuition you need. Note also that the console will say "server has been stopped." That doesn't mean that the tool failed. In my experience, the interactive map works just fine despite this message. You can see an example of the output below.
 
-![](umap_pca_vs_umap_space_trimmed.gif)
+![](inst/extdata/umap_pca_vs_umap_space_trimmed.gif)
 
 ## Additional notes
 In the current implementation, the nearest neighbors are computed using Euclidean distance. Future versions of this software will have additional metrics, like cosine distance.
