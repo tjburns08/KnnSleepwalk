@@ -17,7 +17,7 @@ NULL
 #' @param kfn Whether you want to look at the K-nearest or K-farthest neighbors
 #' @param k The number of nearest neighbors
 #' @return The afrorementioned nearest neighbor matrix
-#' @export
+#' @keywords internal
 MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
   dist_mat <- dist(mat) %>% as.matrix()
   nn_mat <- lapply(seq(nrow(dist_mat)), function(i) {

@@ -23,3 +23,4 @@ the output of the KnnSleepwalk will show the K-nearest or fartherst neighbors
 as black, with the rest of the cells being a lighter color. This is what we
 call the nearest neighbor matrix.
 }
+\keyword{internal}
