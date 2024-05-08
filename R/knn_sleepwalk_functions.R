@@ -70,7 +70,7 @@ KnnSleepwalk <- function(embedding, orig_data, k = 100, output_file = NULL, poin
 #' @param point_size How big you want the point on the plots to be
 #' @param plot_names What you want the comparison plots to be named
 #' @export
-KfnSleepwalk <- function(embedding, orig_data, embedding, k = 100, output_file = NULL, point_size = 1.5, plot_names = c("KFN embedding space", "KFN high-dim space")) {
+KfnSleepwalk <- function(embedding, orig_data, k = 100, output_file = NULL, point_size = 1.5, plot_names = c("KFN embedding space", "KFN high-dim space")) {
   message('Building distance matrix')
 
   # First distance matrix

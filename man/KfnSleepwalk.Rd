@@ -5,9 +5,8 @@
 \title{K-farthest neighbors Sleepwalk Direct}
 \usage{
 KfnSleepwalk(
-  mat1,
-  mat2,
   embedding,
+  orig_data,
   k = 100,
   output_file = NULL,
   point_size = 1.5,
@@ -15,13 +14,11 @@ KfnSleepwalk(
 )
 }
 \arguments{
-\item{mat1}{A data matrix with data points as rows and features as columns.
-the matrix must already be filtered by the markers you care about.}
-
-\item{mat2}{A second data matrix in the format as above}
-
 \item{embedding}{The 2-D embedding of the data matrix, in matrix format with
 data points as rows and two columns.}
+
+\item{orig_data}{A data matrix with data points as rows and features as columns.
+the matrix must already be filtered by the markers you care about.}
 
 \item{k}{The number of nearest neighbors to be visualized}
 
