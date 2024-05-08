@@ -14,7 +14,7 @@ MakeNnMatrix(mat, kfn = FALSE, k = 100)
 \item{k}{The number of nearest neighbors}
 }
 \value{
-The afrorementioned nearest neighbor matrix
+The aforementioned nearest neighbor matrix
 }
 \description{
 A helper function for KnnSleepwalk which takes a matrix as

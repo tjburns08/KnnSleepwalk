@@ -16,7 +16,7 @@ NULL
 #' @param mat A data matrix, presumably from a single-cell dataset
 #' @param kfn Whether you want to look at the K-nearest or K-farthest neighbors
 #' @param k The number of nearest neighbors
-#' @return The afrorementioned nearest neighbor matrix
+#' @return The aforementioned nearest neighbor matrix
 #' @keywords internal
 MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
   dist_mat <- dist(mat) %>% as.matrix()
