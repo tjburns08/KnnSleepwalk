@@ -16,8 +16,8 @@ BiaxialSleepwalk(
 \arguments{
 \item{root_biax}{The biaxial plot from which the KNN are calculated}
 
-\item{biax_list}{The remaining biaxials that the KNN are going to be
-visualized on (maximum of 4)}
+\item{biax_list}{A list that starts with root_biax and continues with the
+remaining biaxials that you care about. These will be visualized.}
 
 \item{k}{The number of nearest neighbors}
 

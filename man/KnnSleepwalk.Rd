@@ -29,7 +29,8 @@ the matrix must already be filtered by the markers you care about.}
 
 \item{plot_names}{What you want the comparison plots to be named}
 
-\item{kfn}{Whether you want to look at the k-farthest neighbors. If false (default) then you look at the K-nearest nighbors.}
+\item{kfn}{Whether you want to look at the k-farthest neighbors. If false
+(default) then you look at the K-nearest nighbors.}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces

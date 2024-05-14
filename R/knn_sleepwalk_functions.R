@@ -50,7 +50,8 @@ MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
 #' @param output_file The file to save your sleepwalk html page to
 #' @param point_size How big you want the point on the plots to be
 #' @param plot_names What you want the comparison plots to be named
-#' @param kfn Whether you want to look at the k-farthest neighbors. If false (default) then you look at the K-nearest nighbors.
+#' @param kfn Whether you want to look at the k-farthest neighbors. If false
+#' (default) then you look at the K-nearest nighbors.
 #' @export
 KnnSleepwalk <- function(embedding,
                          orig_data,
@@ -83,14 +84,15 @@ KnnSleepwalk <- function(embedding,
 #' neighbors of the first biaxial plot are calculated, and the corresponding
 #' cells are highlighted on any of the other biaxials that are on the map
 #' @param root_biax The biaxial plot from which the KNN are calculated
-#' @param biax_list The remaining biaxials that the KNN are going to be
-#' visualized on (maximum of 4)
+#' @param biax_list A list that starts with root_biax and continues with the
+#' remaining biaxials that you care about. These will be visualized.
 #' @param k The number of nearest neighbors
 #' @param output_file The file that the output gets saved to. If set to NULL,
 #' then no save takes place
 #' @param point_size The size of the points on the plots.
 #' @param plot_names These will place names on top of the plots. This vector of
 #' strings must equal the total number of plots being visualized.
+#' @export
 BiaxialSleepwalk <- function(root_biax,
                              biax_list,
                              k = 100,
