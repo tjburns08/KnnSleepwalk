@@ -11,6 +11,7 @@ Description: Built off of the sleepwalk package for single-cell data,
   of the original high-dimensional space on the other.
 License: GPL (>= 3)
 Imports:
+    lsa,
     magrittr,
     sleepwalk
 Encoding: UTF-8

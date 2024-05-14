@@ -4,7 +4,7 @@
 \alias{MakeNnMatrix}
 \title{Make nearest neighbor matrix}
 \usage{
-MakeNnMatrix(mat, kfn = FALSE, k = 100)
+MakeNnMatrix(mat, kfn = FALSE, k = 100, metric = "euclidean")
 }
 \arguments{
 \item{mat}{A data matrix, presumably from a single-cell dataset}
@@ -12,6 +12,9 @@ MakeNnMatrix(mat, kfn = FALSE, k = 100)
 \item{kfn}{Whether you want to look at the K-nearest or K-farthest neighbors}
 
 \item{k}{The number of nearest neighbors}
+
+\item{metric}{The distance metric to be used. Available options: euclidean,
+manhattan, and cosine}
 }
 \value{
 The aforementioned nearest neighbor matrix

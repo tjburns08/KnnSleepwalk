@@ -11,7 +11,8 @@ KnnSleepwalk(
   output_file = NULL,
   point_size = 1.5,
   plot_names = c("KNN embedding space", "KNN high-dim space"),
-  kfn = FALSE
+  kfn = FALSE,
+  metric = "euclidean"
 )
 }
 \arguments{
@@ -30,7 +31,12 @@ the matrix must already be filtered by the markers you care about.}
 \item{plot_names}{What you want the comparison plots to be named}
 
 \item{kfn}{Whether you want to look at the k-farthest neighbors. If false
-(default) then you look at the K-nearest nighbors.}
+(default) then you look at the K-nearest neighbors.}
+
+\item{metric}{The distance metric you're going to use for the neighbor
+finding computation for the original high-dimensional data. For the embedding,
+Euclidean is used. Default is also set to euclidean, with manhattan and cosine
+as other options.}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces

@@ -16,10 +16,22 @@ NULL
 #' @param mat A data matrix, presumably from a single-cell dataset
 #' @param kfn Whether you want to look at the K-nearest or K-farthest neighbors
 #' @param k The number of nearest neighbors
+#' @param metric The distance metric to be used. Available options: euclidean,
+#' manhattan, and cosine
 #' @return The aforementioned nearest neighbor matrix
 #' @keywords internal
-MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
-  dist_mat <- dist(mat) %>% as.matrix()
+MakeNnMatrix <- function(mat, kfn = FALSE, k = 100, metric = "euclidean") {
+  # Create the distance matrix
+  if(metric != "cosine") {
+    dist_mat <- dist(mat, method = metric) %>% as.matrix()
+  } else {
+    dist_mat <- lsa::cosine(t(mat))
+    dist_mat <- 1 - dist_mat # To make it cosine distance rather than similarity
+
+    # We have to re-name the rows and columns
+    rownames(dist_mat) <- colnames(dist_mat) <- 1:nrow(dist_mat)
+  }
+
   nn_mat <- lapply(seq(nrow(dist_mat)), function(i) {
     curr <- dist_mat[i,]
     if(kfn) {
@@ -51,7 +63,11 @@ MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
 #' @param point_size How big you want the point on the plots to be
 #' @param plot_names What you want the comparison plots to be named
 #' @param kfn Whether you want to look at the k-farthest neighbors. If false
-#' (default) then you look at the K-nearest nighbors.
+#' (default) then you look at the K-nearest neighbors.
+#' @param metric The distance metric you're going to use for the neighbor
+#' finding computation for the original high-dimensional data. For the embedding,
+#' Euclidean is used. Default is also set to euclidean, with manhattan and cosine
+#' as other options.
 #' @export
 KnnSleepwalk <- function(embedding,
                          orig_data,
@@ -59,17 +75,18 @@ KnnSleepwalk <- function(embedding,
                          output_file = NULL,
                          point_size = 1.5,
                          plot_names = c("KNN embedding space", "KNN high-dim space"),
-                         kfn = FALSE) {
+                         kfn = FALSE,
+                         metric = "euclidean") {
 
   message('Building distance matrix')
 
   # KNN from the first distance matrix
   message("Finding k-nearest neighbors for the embedding")
-  nn_mat1 <- MakeNnMatrix(embedding, kfn = kfn, k = k)
+  nn_mat1 <- MakeNnMatrix(embedding, kfn = kfn, k = k, metric = "euclidean")
 
   # KNN from the second distance matrix
   message("Finding k-nearest neighbors for original data")
-  nn_mat2 <- MakeNnMatrix(orig_data, kfn = kfn, k = k)
+  nn_mat2 <- MakeNnMatrix(orig_data, kfn = kfn, k = k, metric = metric)
 
   sleepwalk::sleepwalk(embeddings = embedding,
                        compare = "distances",

@@ -45,7 +45,8 @@ Now that we are convinced that things look as they should, we will run our first
 KnnSleepwalk(embedding = umap, 
              orig_data = surface, 
              k = 20, 
-             point_size = 4)
+             point_size = 4, 
+             metric = "cosine")
 ```
 If you want to get some intuition around how well a given embedding preserves the global features of the high-dimensional space it embeds, one way to get at that is by looking at the K-farthest neighbors (KFN). These are the cells that are the farthest away from a given cell. You can already get some intuition around what the k-farthest neighbors would be on a UMAP, given that it's still a visualizable 2 dimensions, but how well does that approximate the original high-dimensional space? We can have a look below, where we run KnnSleepwalk, but set kfn to be TRUE. Note that for KFN visualizations, it helps to increase the number of neighbors you're looking at. 
 
