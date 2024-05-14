@@ -52,7 +52,14 @@ MakeNnMatrix <- function(mat, kfn = FALSE, k = 100) {
 #' @param plot_names What you want the comparison plots to be named
 #' @param kfn Whether you want to look at the k-farthest neighbors. If false (default) then you look at the K-nearest nighbors.
 #' @export
-KnnSleepwalk <- function(embedding, orig_data, k = 100, output_file = NULL, point_size = 1.5, plot_names = c("KNN embedding space", "KNN high-dim space"), kfn = FALSE) {
+KnnSleepwalk <- function(embedding,
+                         orig_data,
+                         k = 100,
+                         output_file = NULL,
+                         point_size = 1.5,
+                         plot_names = c("KNN embedding space", "KNN high-dim space"),
+                         kfn = FALSE) {
+
   message('Building distance matrix')
 
   # KNN from the first distance matrix
@@ -71,5 +78,32 @@ KnnSleepwalk <- function(embedding, orig_data, k = 100, output_file = NULL, poin
                        titles = plot_names)
 }
 
+#' @title Biaxial Sleepwalk
+#' @description A generalization of KNN sleepwalk, whereby the K-nearest
+#' neighbors of the first biaxial plot are calculated, and the corresponding
+#' cells are highlighted on any of the other biaxials that are on the map
+#' @param root_biax The biaxial plot from which the KNN are calculated
+#' @param biax_list The remaining biaxials that the KNN are going to be
+#' visualized on (maximum of 4)
+#' @param k The number of nearest neighbors
+#' @param output_file The file that the output gets saved to. If set to NULL,
+#' then no save takes place
+#' @param point_size The size of the points on the plots.
+#' @param plot_names These will place names on top of the plots. This vector of
+#' strings must equal the total number of plots being visualized.
+BiaxialSleepwalk <- function(root_biax,
+                             biax_list,
+                             k = 100,
+                             output_file = NULL,
+                             point_size = 1.5,
+                             plot_names = c()) {
 
+  dist_mat <- dist(root_biax) %>% as.matrix()
+  nn_mat <- MakeNnMatrix(mat = dist_mat, k = k, kfn = FALSE)
 
+  sleepwalk::sleepwalk(embeddings = biax_list,
+                       distances = nn_mat,
+                       pointSize = point_size,
+                       saveToFile = output_file,
+                       titles = plot_names)
+}
