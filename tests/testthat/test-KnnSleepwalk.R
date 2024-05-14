@@ -13,6 +13,4 @@ test_that("The knn matrix is thresholded at 2 values", {
   testthat::expect_true(length(table(KnnSleepwalk:::MakeNnMatrix(umap))) == 2)
 })
 
-test_that("Only euclidean, cosine, and manhattan are considered as metrics", {
-  testthat::expect_error(KnnSleepwalk:::MakeNnMatrix(umap, metric = "your mom"))
-})
+

@@ -4,6 +4,7 @@
 
 #' @importFrom magrittr %>%
 #' @importFrom stats dist
+#' @import lsa
 #' @import sleepwalk
 NULL
 
@@ -117,8 +118,7 @@ BiaxialSleepwalk <- function(root_biax,
                              point_size = 1.5,
                              plot_names = c()) {
 
-  dist_mat <- dist(root_biax) %>% as.matrix()
-  nn_mat <- MakeNnMatrix(mat = dist_mat, k = k, kfn = FALSE)
+  nn_mat <- MakeNnMatrix(mat = root_biax, k = k, kfn = FALSE)
 
   sleepwalk::sleepwalk(embeddings = biax_list,
                        distances = nn_mat,
