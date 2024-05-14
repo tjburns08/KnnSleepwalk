@@ -24,7 +24,7 @@ data("example_surface_markers")
 Test to make sure the data are present. Both should be tibbles.
 ```r
 surface # Orignal marker space
-umap # UMAP
+umap # The embedding
 ```
 Now we run KNN sleepwalk:
 

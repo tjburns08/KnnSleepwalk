@@ -2,7 +2,7 @@
 % Please edit documentation in R/knn_sleepwalk_functions.R
 \name{MakeNnMatrix}
 \alias{MakeNnMatrix}
-\title{Make nearest neighbor matrix}
+\title{Make nearest (or farthest) neighbor matrix}
 \usage{
 MakeNnMatrix(mat, kfn = FALSE, k = 100, metric = "euclidean")
 }
