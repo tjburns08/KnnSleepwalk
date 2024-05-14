@@ -2,13 +2,13 @@ Package: KnnSleepwalk
 Type: Package
 Title: Compare K-nearest neighbors of one biaxial plot to another
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Tyler Burns <info@burnslsc.com>
-Description: Built off of the sleepwalk package for single-cell data, 
-  KnnSleepwalk allows the user to take two or more plots, and compare the 
-  K-nearest neighbors (KNN) of one to the KNN of the other. The common use case
-  is to take two UMAPs, and display the KNN of UMAP space on one, and the KNN
-  of the original high-dimensional space on the other.
+Authors@R: 
+    person("Tyler", "Burns", email = "info@burnslsc.com", role = c("aut", "cre"))
+Description: Built off of the sleepwalk package for single-cell data 
+  (S. Ovchinnikova and S. Anders), KnnSleepwalk allows the user to take two or 
+  more plots, and compare the K-nearest neighbors (KNN) of one to the KNN of the 
+  other. The common use case is to take two UMAPs, and display the KNN of UMAP 
+  space on one, and the KNN of the original high-dimensional space on the other.
 License: GPL (>= 3)
 Imports:
     lsa,
@@ -23,3 +23,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+URL: https://github.com/tjburns08/KnnSleepwalk
+BugReports: https://github.com/tjburns08/KnnSleepwalk/issues
