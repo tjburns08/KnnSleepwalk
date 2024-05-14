@@ -8,7 +8,7 @@
 #' @import sleepwalk
 NULL
 
-#' @title Make nearest neighbor matrix
+#' @title Make nearest (or farthest) neighbor matrix
 #' @description A helper function for KnnSleepwalk which takes a matrix as
 #' input, computes the distance matrix, and then changes the values such that
 #' the output of the KnnSleepwalk will show the K-nearest or fartherst neighbors
