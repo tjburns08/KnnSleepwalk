@@ -1,0 +1,73 @@
+---
+title: "how-to-KnnSleepwalk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{how-to-KnnSleepwalk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(KnnSleepwalk)
+```
+
+Welcome to the vignette for the KNN Sleepwalk package. The README associated with this package contains a description of the problem that this package solves, along with an example, and a gif showing what the output looks like. Here, we will go into details as to how to use each of the functions.
+
+The package comes pre-built with a pre-existing dataset to get you started. This is a CyTOF whole blood dataset that has already been pre-processed, subsampled down to 1000 cells, and only the surface markers as features. UMAP has already been run on the aforementioned data as well. These data objects are labeled "surface" and "umap" accordingly. Below, we will bring them into the environment.
+
+```{r}
+data("example_surface_markers")
+data("example_umap")
+```
+
+And now we will look at them to double check that they are what's expected. They are in the "tibble" format.
+
+```{r}
+surface
+```
+
+```{r}
+umap
+```
+
+We will note here that the subsequent blocks of code will not be evaluated in this vignette, simply because these functions lead to an interactive interface in the browser. Therefore, you will have to run this on your end, but I leave the code below for you to copy/paste into your editor.
+
+Now that we are convinced that things look as they should, we will run our first function, KnnSleepwalk. This is the main function of the package and the primary motivator for creating the package. It takes the K-nearest neighbors (KNN) of UMAP space and the original high-dimensional space, and visualizes them on two UMAPs side by side, leveraging the sleepwalk R package. This is done in a separate browser window that automatically pops up when you run the function. Note that you can save this to a html file as well. When you hover the cursor over a given cell, the KNN in UMAP space and high-dimensional space are colored black, as opposed to the default lighter color. 
+
+```{r, eval=FALSE}
+KnnSleepwalk(embedding = umap, 
+             orig_data = surface, 
+             k = 20, 
+             point_size = 4)
+```
+If you want to get some intuition around how well a given embedding preserves the global features of the high-dimensional space it embeds, one way to get at that is by looking at the K-farthest neighbors (KFN). These are the cells that are the farthest away from a given cell. You can already get some intuition around what the k-farthest neighbors would be on a UMAP, given that it's still a visualizable 2 dimensions, but how well does that approximate the original high-dimensional space? We can have a look below, where we run KnnSleepwalk, but set kfn to be TRUE. Note that for KFN visualizations, it helps to increase the number of neighbors you're looking at. 
+
+What you'll notice is that there doesn't seem to be a good way to predict what the KFN are going to be in the high-dimensional space. In other words, the embedding in our case is not great with respect to this particular metric. 
+
+```{r, eval=FALSE}
+KnnSleepwalk(embedding = umap, 
+             orig_data = surface, 
+             k = 100, 
+             point_size = 4, 
+             kfn = TRUE)
+```
+Now we will look at a related application of this package. One in which you abstract out to any biaxial plot that the data has. In this case below, we are going to look at a single biaxial plot, where the KNN are computed on that plot. Then, the respective cells will be visualized on the UMAP, so you can understand exactly where within UMAP space the cells on a biaxial lie. Note that you can do this the other way around, or with any biaxial with any other biaxials. You can do this with up to five total plots (including the "root" plot) as per the limits of the sleepwalk package itself. In later versions of the package, I intend to extend this functionality further.
+
+```{r, eval=FALSE}
+biax <- dplyr::select(surface, CD3, CD19)
+BiaxialSleepwalk(root_biax = biax, 
+                 biax_list = list(biax, umap), 
+                 k = 5, 
+                 point_size = 4)
+```
+
+Future directions of this package include the ability to use this to do real time back gating (eg. if this was a FlowJo plugin). It would also be nice to make this a Shiny interface. However, it is my hope that the package is sufficiently straightforward that any biologist can use it as is.
+
+It is my hope that every user analyzing single-cell data uses this package as a way to do a sanity check on their lower dimensional embeddings that they produce. Failure to do so leads to things like manual gating directly on regions of a UMAP that are otherwise meaningless to gate (because the KNN extend farther than the boundaries of the gate).
