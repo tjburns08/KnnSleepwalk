@@ -2,12 +2,6 @@
 # Author: Tyler J Burns
 # Date: May 7, 2024
 
-#' @importFrom magrittr %>%
-#' @importFrom stats dist
-#' @import lsa
-#' @import sleepwalk
-NULL
-
 #' @title Make nearest (or farthest) neighbor matrix
 #' @description A helper function for KnnSleepwalk which takes a matrix as
 #' input, computes the distance matrix, and then changes the values such that
