@@ -58,10 +58,12 @@ MakeNnMatrix <- function(mat, kfn = FALSE, k = 100, metric = "euclidean") {
 #' data points as rows and two columns.
 #' @param orig_data A data matrix with data points as rows and features as columns.
 #' the matrix must already be filtered by the markers you care about.
-#' @param k The number of nearest neighbors to be visualized
+#' @param k The number of the nearest neighbors to be visualized
 #' @param output_file The file to save your sleepwalk html page to
 #' @param point_size How big you want the point on the plots to be
-#' @param plot_names What you want the comparison plots to be named
+#' @param plot_names What you want the comparison plots to be named. This vector
+#' of strings needs to match the number of plots (eg. 2 if we're dealing with
+#' the default of 2 plots here).
 #' @param kfn Whether you want to look at the k-farthest neighbors. If false
 #' (default) then you look at the K-nearest neighbors.
 #' @param metric The distance metric you're going to use for the neighbor
