@@ -8,11 +8,14 @@ KnnSleepwalk(
   embedding,
   orig_data,
   k = 100,
+  ranks = FALSE,
+  rann = FALSE,
   output_file = NULL,
   point_size = 1.5,
   plot_names = c("KNN embedding space", "KNN high-dim space"),
   kfn = FALSE,
-  metric = "euclidean"
+  metric = "euclidean",
+  ...
 )
 }
 \arguments{
@@ -22,13 +25,20 @@ data points as rows and two columns.}
 \item{orig_data}{A data matrix with data points as rows and features as columns.
 the matrix must already be filtered by the markers you care about.}
 
-\item{k}{The number of nearest neighbors to be visualized}
+\item{k}{The number of the nearest neighbors to be visualized}
+
+\item{ranks}{Whether to visualize neighbor ranks using a color gradient}
+
+\item{rann}{Whether to use faster neighbor search (only for nearest neighbors
+and not used with cosine/manhattan distances)}
 
 \item{output_file}{The file to save your sleepwalk html page to}
 
 \item{point_size}{How big you want the point on the plots to be}
 
-\item{plot_names}{What you want the comparison plots to be named}
+\item{plot_names}{What you want the comparison plots to be named. This vector
+of strings needs to match the number of plots (eg. 2 if we're dealing with
+the default of 2 plots here).}
 
 \item{kfn}{Whether you want to look at the k-farthest neighbors. If false
 (default) then you look at the K-nearest neighbors.}
@@ -37,6 +47,8 @@ the matrix must already be filtered by the markers you care about.}
 finding computation for the original high-dimensional data. For the embedding,
 Euclidean is used. Default is also set to euclidean, with manhattan and cosine
 as other options.}
+
+\item{...}{Any other keyword arguments to pass onto \code{RANN::nn2} if used}
 }
 \description{
 Takes a data matrix and a 2-D embedding as input. It produces
