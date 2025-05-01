@@ -49,4 +49,3 @@ approximate algorithm. Even if \code{eps} is set to 0, some discrepancies can
 occur between the default and \code{ran=TRUE} setting due to inconsistent
 treatment of tied neighbor ranks.
 }
-\keyword{internal}

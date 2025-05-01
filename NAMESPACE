@@ -3,6 +3,7 @@
 export(BiaxialSleepwalk)
 export(GridSamplePoints)
 export(KnnSleepwalk)
+export(MakeNnMatrix)
 export(PlotNeighborhood)
 export(SleepwalkSP)
 import(lsa)

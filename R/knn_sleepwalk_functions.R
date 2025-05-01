@@ -45,7 +45,7 @@ NULL
 #' approximate algorithm. Even if `eps` is set to 0, some discrepancies can 
 #' occur between the default and `ran=TRUE` setting due to inconsistent 
 #' treatment of tied neighbor ranks.
-#' @keywords internal
+#' @export
 MakeNnMatrix <- function(mat, kfn = FALSE, rann = FALSE, ranks = FALSE, k = 100,
                          metric = "euclidean", ...) {
   metric <- match.arg(metric, choices = c("euclidean", "cosine", "manhattan"))
