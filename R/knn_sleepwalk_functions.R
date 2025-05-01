@@ -101,7 +101,7 @@ MakeNnMatrix <- function(mat, kfn = FALSE, rann = FALSE, ranks = FALSE, k = 100,
   
   attributes(nn_mat)$ranks <- ranks
   rownames(nn_mat) <- colnames(nn_mat) <- 1:nrow(nn_mat)
-  nn_mat[lower.tri(nn_mat)] = t(nn_mat)[lower.tri(nn_mat)]
+  # nn_mat[lower.tri(nn_mat)] = t(nn_mat)[lower.tri(nn_mat)]
   return(nn_mat)
 }
 
