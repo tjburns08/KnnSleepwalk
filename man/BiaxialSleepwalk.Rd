@@ -34,3 +34,15 @@ A generalization of KNN sleepwalk, whereby the K-nearest
 neighbors of the first biaxial plot are calculated, and the corresponding
 cells are highlighted on any of the other biaxials that are on the map
 }
+\examples{
+data("example_umap")
+data("example_surface_markers")
+BiaxialSleepwalk(
+  root_biax = surface[,c("CD4", "CD8")],
+  biax_list = list(
+    surface[,c("CD4", "CD8")],
+    surface[,c("IgA", "IgM")],
+    surface[,c("IgD", "HLA-DR")]
+  )
+)
+}

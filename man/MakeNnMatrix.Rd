@@ -4,26 +4,48 @@
 \alias{MakeNnMatrix}
 \title{Make nearest (or farthest) neighbor matrix}
 \usage{
-MakeNnMatrix(mat, kfn = FALSE, k = 100, metric = "euclidean")
+MakeNnMatrix(
+  mat,
+  kfn = FALSE,
+  rann = FALSE,
+  ranks = FALSE,
+  k = 100,
+  metric = "euclidean",
+  ...
+)
 }
 \arguments{
 \item{mat}{A data matrix, presumably from a single-cell dataset}
 
 \item{kfn}{Whether you want to look at the K-nearest or K-farthest neighbors}
 
+\item{rann}{Whether to use the faster RANN for neighbor search (only for
+nearest neighbors and Euclidean distances)}
+
+\item{ranks}{Whether to retain neighbourhood ranks for a colorscale}
+
 \item{k}{The number of nearest neighbors}
 
 \item{metric}{The distance metric to be used. Available options: euclidean,
 manhattan, and cosine}
+
+\item{...}{Any other keyword arguments to pass onto \code{RANN::nn2} if used}
 }
 \value{
 The aforementioned nearest neighbor matrix
 }
 \description{
 A helper function for KnnSleepwalk which takes a matrix as
-input, computes the distance matrix, and then changes the values such that
-the output of the KnnSleepwalk will show the K-nearest or fartherst neighbors
-as black, with the rest of the cells being a lighter color. This is what we
-call the nearest neighbor matrix.
+input, and generates a nearest neighbor matrix, so that Sleepwalk shows the
+K-nearest or farthest neighbors as black (or using a gradient by neighbor
+rank), with the rest of the cells being a lighter color.
 }
-\keyword{internal}
+\details{
+The default setting computes a distance matrix for \code{mat}, which is
+infeasible for large data. For accelerated nearest-neighbors with Euclidean
+distances, set \code{rann=TRUE}. For further speed-up, also specify a positive
+value for the keyword argument \code{eps} passed onto \code{RANN::nn2}. This uses an
+approximate algorithm. Even if \code{eps} is set to 0, some discrepancies can
+occur between the default and \code{ran=TRUE} setting due to inconsistent
+treatment of tied neighbor ranks.
+}

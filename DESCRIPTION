@@ -1,7 +1,7 @@
 Package: KnnSleepwalk
 Type: Package
 Title: Compare K-nearest neighbors of one biaxial plot to another
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Tyler", "Burns", email = "info@burnslsc.com", role = c("aut", "cre"))
 Description: Built off of the sleepwalk package for single-cell data 
@@ -16,10 +16,13 @@ Imports:
     sleepwalk
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
 Suggests: 
     knitr,
     rmarkdown,
+    RANN,
+    tidyverser,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
