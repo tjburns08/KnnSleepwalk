@@ -74,7 +74,7 @@ MakeNnMatrix <- function(mat, kfn = FALSE, rann = FALSE, ranks = FALSE, k = 100,
         }
     ))
     
-  } else { # exact k/f-NN via distance matrix
+  } else { # exact k-(F/N)N via distance matrix
     
     # Create the distance matrix
     if(metric != "cosine") {
@@ -93,7 +93,11 @@ MakeNnMatrix <- function(mat, kfn = FALSE, rann = FALSE, ranks = FALSE, k = 100,
         res[mask] <- rank(curr[mask], ties.method = 'min')
         curr <- res
       } else {
-        curr <- as.numeric(!mask)*1000
+        curr <- 
+          if (kfn)
+            as.numeric(mask)*1000
+          else
+            as.numeric(!mask)*1000
       }
       return(curr)
     }) %>% do.call(rbind, .)
@@ -163,6 +167,7 @@ KnnSleepwalk <- function(embedding,
   sleepwalk::sleepwalk(embeddings = embedding,
                        compare = "distances",
                        distances = list(nn_mat1, nn_mat2),
+                       maxdists = c(max(nn_mat1), max(nn_mat2)),
                        saveToFile = output_file,
                        pointSize = point_size,
                        titles = plot_names)
